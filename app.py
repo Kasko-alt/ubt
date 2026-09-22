@@ -4,29 +4,34 @@ import streamlit as st
 
 st.set_page_config(page_title="KASUM AHMAD", layout="wide")
 
-# Жіберілген көк-сұр текстуралық фонды қосу
+
+
+   import base64
+
+with open("background.jpg", "rb") as f:
+    bg = base64.b64encode(f.read()).decode()
+
 st.markdown(
-    """
+    f"""
     <style>
-    .stApp {
-        background-image: url(.stApp {
-    background-image: url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYPDQwMDRsUFRAWIB0iIiAdHx8kKDQsJCYxJx8fLT0tMTU3Ojo);
+    .stApp {{
+        background-image: url("data:image/jpeg;base64,{bg}");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
         background-attachment: fixed;
-    }
-    
-    .main-title {
+    }}
+
+    .main-title {{
         font-size: 80px;
         font-weight: 800;
         letter-spacing: 5px;
         color: #ffffff;
         margin-bottom: 0px;
         line-height: 1;
-    }
-    
-    .sub-title {
+    }}
+
+    .sub-title {{
         font-size: 80px;
         font-weight: 800;
         letter-spacing: 5px;
@@ -34,19 +39,22 @@ st.markdown(
         text-align: right;
         margin-top: 0px;
         line-height: 1;
-    }
-    
-    h1, h2, h3, h4, h5, h6, p, label, div, span, input { 
-        color: #ffffff !important; 
-    }
-    
-    .stButton>button { 
-        background-color: rgba(0, 0, 0, 0.5); 
-        color: #ffffff; 
-        border: 1px solid #ffffff; 
+    }}
+
+    h1, h2, h3, h4, h5, h6, p, label, div, span, input {{
+        color: #ffffff !important;
+    }}
+
+    .stButton > button {{
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #ffffff;
+        border: 1px solid #ffffff;
         border-radius: 5px;
-    }
+    }}
     </style>
+    """,
+    unsafe_allow_html=True,
+)
 """,
     unsafe_allow_html=True,
 )
