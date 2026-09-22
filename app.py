@@ -19,7 +19,21 @@ st.markdown(
     <style>
 
     /* Негізгі фон */
-    .stApp {{
+    .stApp {{ / * Sidebar-ды толық жасыру */
+[data-testid="stSidebar"] {
+    display: none;
+}
+
+/* Sidebar ашатын батырманы да жасыру */
+[data-testid="stSidebarCollapsedControl"] {
+    display: none;
+}
+
+/* Негізгі контентті кеңейту */
+.main .block-container {
+    max-width: 95%;
+    padding-top: 20px;
+}
         background-image:
             linear-gradient(
                 rgba(3, 18, 35, 0.55),
