@@ -1,142 +1,223 @@
 import time
-from datetime import datetime
-import streamlit as st
 import base64
+from datetime import datetime
 
-st.set_page_config(page_title="KASUM AHMAD", layout="wide")
+import streamlit as st
 
 
 # =========================================================
-# ФОН
+# БЕТ БАПТАУ
+# =========================================================
+
+st.set_page_config(
+    page_title="KASUM AHMAD",
+    layout="wide"
+)
+
+
+# =========================================================
+# ФОН СУРЕТІ
 # =========================================================
 
 with open("background.jpg", "rb") as f:
     bg = base64.b64encode(f.read()).decode()
 
 
-st.markdown(
-    f"""
-    <style>
+# =========================================================
+# ДИЗАЙН
+# =========================================================
 
-    /* Негізгі фон */
-    .stApp {{ / * Sidebar-ды толық жасыру */
+css = """
+<style>
+
+/* =========================================
+   НЕГІЗГІ ФОН
+   ========================================= */
+
+.stApp {
+    background-image:
+        linear-gradient(
+            rgba(3, 18, 35, 0.55),
+            rgba(3, 18, 35, 0.70)
+        ),
+        url("data:image/jpeg;base64,BG_IMAGE");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+
+/* =========================================
+   SIDEBAR-ДЫ ТОЛЫҚ ЖАСЫРУ
+   ========================================= */
+
 [data-testid="stSidebar"] {
     display: none;
 }
 
-/* Sidebar ашатын батырманы да жасыру */
 [data-testid="stSidebarCollapsedControl"] {
     display: none;
 }
 
-/* Негізгі контентті кеңейту */
-.main .block-container {
-    max-width: 95%;
-    padding-top: 20px;
+
+/* =========================================
+   НЕГІЗГІ КОНТЕНТ
+   ========================================= */
+
+.block-container {
+    max-width: 1100px;
+    padding-top: 25px;
 }
-        background-image:
-            linear-gradient(
-                rgba(3, 18, 35, 0.55),
-                rgba(3, 18, 35, 0.70)
-            ),
-            url("data:image/jpeg;base64,{bg}");
-
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }}
 
 
-    /* Негізгі экран */
-    .block-container {{
-        max-width: 1100px;
-        padding-top: 50px;
-    }}
+/* =========================================
+   KASUM
+   ========================================= */
+
+.main-title {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: white;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255,255,255,0.35);
+}
 
 
-    /* KASUM */
-    .main-title {{
-        font-size: 80px;
-        font-weight: 900;
-        letter-spacing: 6px;
-        color: white;
-        line-height: 1;
-        text-shadow: 0 0 20px rgba(255,255,255,0.35);
-    }}
+/* =========================================
+   AHMAD
+   ========================================= */
+
+.sub-title {
+    font-size: 80px;
+    font-weight: 900;
+    letter-spacing: 6px;
+    color: white;
+    text-align: right;
+    line-height: 1;
+    text-shadow: 0 0 20px rgba(255,255,255,0.35);
+}
 
 
-    /* AHMAD */
-    .sub-title {{
-        font-size: 80px;
-        font-weight: 900;
-        letter-spacing: 6px;
-        color: white;
-        text-align: right;
-        line-height: 1;
-        text-shadow: 0 0 20px rgba(255,255,255,0.35);
-    }}
+/* =========================================
+   БАРЛЫҚ МӘТІН
+   ========================================= */
+
+h1, h2, h3, h4, h5, h6,
+p, label, div, span {
+    color: white !important;
+}
 
 
-    /* Барлық мәтіндер */
-    h1, h2, h3, h4, h5, h6,
-    p, label, div, span {{
-        color: white !important;
-    }}
+/* =========================================
+   INPUT
+   ========================================= */
+
+.stTextInput input {
+    background-color: rgba(20, 40, 60, 0.65) !important;
+    color: white !important;
+
+    border: 1px solid rgba(255,255,255,0.45) !important;
+
+    border-radius: 8px !important;
+
+    height: 50px;
+}
 
 
-    /* Input */
-    .stTextInput input {{
-        background-color: rgba(20, 40, 60, 0.65) !important;
-        color: white !important;
-        border: 1px solid rgba(255,255,255,0.45) !important;
-        border-radius: 8px !important;
-        height: 50px;
-    }}
+/* Placeholder */
+
+.stTextInput input::placeholder {
+    color: rgba(255,255,255,0.65) !important;
+}
 
 
-    /* Input ішіндегі placeholder */
-    .stTextInput input::placeholder {{
-        color: rgba(255,255,255,0.65) !important;
-    }}
+/* =========================================
+   БАТЫРМАЛАР
+   ========================================= */
+
+.stButton > button {
+    width: 100%;
+    height: 50px;
+
+    background-color: rgba(5, 20, 35, 0.70) !important;
+
+    color: white !important;
+
+    border: 1px solid rgba(255,255,255,0.75) !important;
+
+    border-radius: 8px !important;
+
+    font-size: 18px;
+    font-weight: 600;
+
+    transition: 0.3s;
+}
 
 
-    /* Батырма */
-    .stButton > button {{
-        width: 100%;
-        height: 50px;
+.stButton > button:hover {
+    background-color: rgba(255,255,255,0.15) !important;
 
-        background-color: rgba(5, 20, 35, 0.70) !important;
-
-        color: white !important;
-
-        border: 1px solid rgba(255,255,255,0.75) !important;
-        border-radius: 8px !important;
-
-        font-size: 18px;
-        font-weight: 600;
-
-        transition: 0.3s;
-    }}
+    border-color: white !important;
+}
 
 
-    .stButton > button:hover {{
-        background-color: rgba(255,255,255,0.15) !important;
-        border-color: white !important;
-    }}
+/* =========================================
+   КІРУ ТАҚЫРЫБЫ
+   ========================================= */
+
+.login-title {
+    font-size: 25px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
 
 
-    /* Тақырып */
-    .login-title {{
-        font-size: 25px;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }}
+/* =========================================
+   ШЫҒУ БАТЫРМАСЫНЫҢ БЛОГЫ
+   ========================================= */
 
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+.logout-button {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+
+/* =========================================
+   TAB
+   ========================================= */
+
+button[data-baseweb="tab"] {
+    color: white !important;
+}
+
+
+/* =========================================
+   SELECTBOX
+   ========================================= */
+
+div[data-baseweb="select"] {
+    background-color: rgba(20, 40, 60, 0.65) !important;
+}
+
+
+/* =========================================
+   RADIO
+   ========================================= */
+
+.stRadio label {
+    color: white !important;
+}
+
+</style>
+"""
+
+# BG_IMAGE орнына суретті саламыз
+css = css.replace("BG_IMAGE", bg)
+
+st.markdown(css, unsafe_allow_html=True)
 
 
 # =========================================================
@@ -168,7 +249,7 @@ if "users" not in st.session_state:
             "pass": "dir123",
             "role": "director",
             "fails": 0,
-            "ban_until": 0,
+            "ban_until": 0
         },
 
         "zam": {
@@ -176,7 +257,7 @@ if "users" not in st.session_state:
             "role": "zam",
             "fails": 0,
             "ban_until": 0
-        },
+        }
 
     }
 
@@ -189,24 +270,28 @@ if "questions" not in st.session_state:
 
         "Қазақстан тарихы": [],
 
-        "Оқу сауаттылығы": [],
+        "Оқу сауаттылығы": []
 
     }
 
 
 if "login_logs" not in st.session_state:
+
     st.session_state.login_logs = []
 
 
 if "can_zam_add_q" not in st.session_state:
+
     st.session_state.can_zam_add_q = True
 
 
 if "results" not in st.session_state:
+
     st.session_state.results = []
 
 
 if "logged_user" not in st.session_state:
+
     st.session_state.logged_user = None
 
 
@@ -214,7 +299,7 @@ curr_time = time.time()
 
 
 # =========================================================
-# КІРУ
+# КІРМЕГЕН КЕЗДЕ
 # =========================================================
 
 if not st.session_state.logged_user:
@@ -224,10 +309,12 @@ if not st.session_state.logged_user:
         unsafe_allow_html=True
     )
 
+
     login = st.text_input(
         "Логин:",
         placeholder="Логин енгізіңіз..."
     )
+
 
     password = st.text_input(
         "Пароль:",
@@ -243,7 +330,10 @@ if not st.session_state.logged_user:
             usr = st.session_state.users[login]
 
 
-            # Бан тексеру
+            # -----------------------------
+            # БАН ТЕКСЕРУ
+            # -----------------------------
+
             if usr["ban_until"] > curr_time:
 
                 left = int(
@@ -255,16 +345,21 @@ if not st.session_state.logged_user:
                 )
 
 
-            # Пароль дұрыс
+            # -----------------------------
+            # ПАРОЛЬ ДҰРЫС
+            # -----------------------------
+
             elif usr["pass"] == password:
 
                 usr["fails"] = 0
 
                 st.session_state.logged_user = login
 
+
                 login_time = datetime.now().strftime(
                     "%Y-%m-%d %H:%M:%S"
                 )
+
 
                 st.session_state.login_logs.append(
                     {
@@ -274,13 +369,18 @@ if not st.session_state.logged_user:
                     }
                 )
 
+
                 st.rerun()
 
 
-            # Пароль қате
+            # -----------------------------
+            # ПАРОЛЬ ҚАТЕ
+            # -----------------------------
+
             else:
 
                 usr["fails"] += 1
+
 
                 if usr["fails"] >= 5:
 
@@ -306,7 +406,7 @@ if not st.session_state.logged_user:
 
 
 # =========================================================
-# КІРГЕННЕН КЕЙІН
+# КІРГЕН КЕЗДЕ
 # =========================================================
 
 else:
@@ -318,19 +418,22 @@ else:
     role = user_info["role"]
 
 
-    # Sidebar
-    st.sidebar.write(
-        f"Пайдаланушы: "
-        f"**{st.session_state.logged_user}** "
-        f"({role.upper()})"
-    )
+    # =====================================================
+    # ШЫҒУ БАТЫРМАСЫ — ЖОҒАРЫ ОҢ ЖАҚТА
+    # =====================================================
+
+    empty, logout_col = st.columns([8, 1])
+
+    with logout_col:
+
+        if st.button("Шығу"):
+
+            st.session_state.logged_user = None
+
+            st.rerun()
 
 
-    if st.sidebar.button("Шығу"):
-
-        st.session_state.logged_user = None
-
-        st.rerun()
+    st.write("---")
 
 
     # =====================================================
@@ -345,12 +448,15 @@ else:
                 "🔑 Логин/Парольдер",
                 "📊 Тест Нәтижелері",
                 "🔓 Банды Шешу",
-                "🔐 Пароль & Доступ",
+                "🔐 Пароль & Доступ"
             ]
         )
 
 
-        # Кіру тарихы
+        # -----------------------------------------------
+        # КІРУ ТАРИХЫ
+        # -----------------------------------------------
+
         with tab1:
 
             for log in reversed(
@@ -364,7 +470,10 @@ else:
                 )
 
 
-        # Логиндер
+        # -----------------------------------------------
+        # ЛОГИНДЕР
+        # -----------------------------------------------
+
         with tab2:
 
             st.json(
@@ -372,7 +481,10 @@ else:
             )
 
 
-        # Нәтижелер
+        # -----------------------------------------------
+        # ТЕСТ НӘТИЖЕЛЕРІ
+        # -----------------------------------------------
+
         with tab3:
 
             for r in st.session_state.results:
@@ -385,7 +497,10 @@ else:
                 )
 
 
-        # Бан шешу
+        # -----------------------------------------------
+        # БАНДЫ ШЕШУ
+        # -----------------------------------------------
+
         with tab4:
 
             for u_name, u_data in (
@@ -409,13 +524,17 @@ else:
                         st.rerun()
 
 
-        # Пароль және доступ
+        # -----------------------------------------------
+        # ПАРОЛЬ ЖӘНЕ ДОСТУП
+        # -----------------------------------------------
+
         with tab5:
 
             allow_zam = st.checkbox(
                 "Зам директорға сұрақ қосуға доступ беру",
                 value=st.session_state.can_zam_add_q
             )
+
 
             st.session_state.can_zam_add_q = allow_zam
 
@@ -465,7 +584,7 @@ else:
 
 
     # =====================================================
-    # ЗАМ / ДИРЕКТОР
+    # ЗАМ / ДИРЕКТОР БАСҚАРУ ПАНЕЛІ
     # =====================================================
 
     if role == "director" or role == "zam":
@@ -483,7 +602,10 @@ else:
         )
 
 
-        # Сұрақ құрастыру
+        # -----------------------------------------------
+        # СҰРАҚ ҚҰРАСТЫРУ
+        # -----------------------------------------------
+
         with z_tab1:
 
             if (
@@ -564,27 +686,39 @@ else:
                                     "A": opt_a,
                                     "B": opt_b,
                                     "C": opt_c,
-                                    "D": opt_d,
+                                    "D": opt_d
                                 },
 
-                                "correct": correct_opt,
+                                "correct": correct_opt
                             }
                         )
+
 
                         st.success(
                             "Сұрақ қосылды!"
                         )
 
+                    else:
 
-        # Оқушы қосу
+                        st.warning(
+                            "Барлық жолды толтырыңыз!"
+                        )
+
+
+        # -----------------------------------------------
+        # ОҚУШЫ ҚОСУ
+        # -----------------------------------------------
+
         with z_tab2:
 
             new_st_u = st.text_input(
                 "Оқушы логині:"
             )
 
+
             new_st_p = st.text_input(
-                "Оқушы паролі:"
+                "Оқушы паролі:",
+                type="password"
             )
 
 
@@ -604,11 +738,18 @@ else:
 
                         "fails": 0,
 
-                        "ban_until": 0,
+                        "ban_until": 0
                     }
+
 
                     st.success(
                         "Оқушы қосылды!"
+                    )
+
+                else:
+
+                    st.warning(
+                        "Логин мен парольді толтырыңыз!"
                     )
 
 
@@ -626,11 +767,9 @@ else:
         )
 
 
-        q_list = (
-            st.session_state.questions[
-                subject
-            ]
-        )
+        q_list = st.session_state.questions[
+            subject
+        ]
 
 
         if q_list:
@@ -690,7 +829,7 @@ else:
                             ),
 
                         "score":
-                            f"{score}/{len(q_list)}",
+                            f"{score}/{len(q_list)}"
                     }
                 )
 
@@ -698,3 +837,9 @@ else:
                 st.success(
                     f"Нәтиже: {score} / {len(q_list)}"
                 )
+
+        else:
+
+            st.info(
+                "Бұл пәнде әзірге сұрақ жоқ."
+            )
